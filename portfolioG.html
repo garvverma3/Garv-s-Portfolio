@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Garv Verma</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #fafaf8;
+    --surface: #f4f3f0;
+    --border: #e5e4e0;
+    --text: #1a1a18;
+    --muted: #6b6b66;
+    --subtle: #9e9e98;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(250,250,248,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 48px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 40px; }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 13px;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  .container { max-width: 880px; margin: 0 auto; padding: 0 40px; }
+
+  section { padding: 96px 0; border-bottom: 1px solid var(--border); }
+  section:last-of-type { border-bottom: none; }
+
+  #hero { padding-top: 160px; padding-bottom: 96px; }
+
+  .hero-eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--subtle);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--subtle);
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(42px, 6vw, 68px);
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 28px;
+  }
+  h1 em { font-style: italic; color: var(--muted); }
+
+  .hero-desc {
+    font-size: 16px;
+    color: var(--muted);
+    max-width: 520px;
+    line-height: 1.75;
+    font-weight: 300;
+    margin-bottom: 48px;
+  }
+
+  .hero-actions { display: flex; gap: 16px; align-items: center; }
+
+  .btn-dark {
+    display: inline-block;
+    background: var(--text);
+    color: var(--bg);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 12px 28px;
+    border-radius: 2px;
+    transition: opacity 0.2s;
+  }
+  .btn-dark:hover { opacity: 0.78; }
+
+  .btn-line {
+    display: inline-block;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 13px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 2px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .btn-line:hover { color: var(--text); border-color: var(--text); }
+
+  .sec-label {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--subtle);
+    margin-bottom: 48px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .sec-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin-bottom: 40px;
+  }
+  h2 em { font-style: italic; color: var(--muted); }
+
+  .about-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .about-text p {
+    color: var(--muted);
+    font-weight: 300;
+    margin-bottom: 18px;
+    font-size: 15px;
+  }
+  .about-text p:last-child { margin-bottom: 0; }
+  .about-text strong { color: var(--text); font-weight: 500; }
+
+  .meta-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
+    gap: 16px;
+  }
+  .meta-row:first-child { border-top: 1px solid var(--border); }
+  .meta-key {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--subtle);
+    flex-shrink: 0;
+  }
+  .meta-val { font-size: 14px; color: var(--text); text-align: right; }
+
+  .skills-table { width: 100%; border-top: 1px solid var(--border); }
+  .skills-row {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 32px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: start;
+  }
+  .skills-cat {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--subtle);
+    padding-top: 3px;
+  }
+  .skills-list { display: flex; flex-wrap: wrap; gap: 8px; }
+  .skill {
+    font-size: 13px;
+    color: var(--muted);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 5px 14px;
+    border-radius: 2px;
+    transition: color 0.2s, background 0.2s;
+  }
+  .skill:hover { color: var(--text); background: var(--border); }
+
+  .projects-list { border-top: 1px solid var(--border); }
+  .project-item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 40px;
+    align-items: start;
+    padding: 32px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .proj-num { font-size: 11px; color: var(--subtle); margin-bottom: 10px; letter-spacing: 0.06em; }
+  .proj-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+  .proj-desc { font-size: 14px; color: var(--muted); font-weight: 300; max-width: 480px; line-height: 1.65; }
+  .proj-status {
+    display: inline-block;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--subtle);
+    border: 1px solid var(--border);
+    padding: 6px 14px;
+    border-radius: 2px;
+    white-space: nowrap;
+    margin-top: 6px;
+  }
+
+  .contact-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .contact-note { font-size: 15px; color: var(--muted); font-weight: 300; line-height: 1.75; }
+
+  .contact-links { border-top: 1px solid var(--border); }
+  .contact-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--border);
+    text-decoration: none;
+    color: var(--text);
+    font-size: 14px;
+    transition: color 0.2s;
+  }
+  .contact-link:hover { color: var(--muted); }
+  .contact-arrow { font-size: 15px; color: var(--subtle); transition: transform 0.2s; }
+  .contact-link:hover .contact-arrow { transform: translate(3px, -3px); }
+
+  footer {
+    padding: 32px 48px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-name { font-family: 'Playfair Display', serif; font-size: 14px; color: var(--muted); }
+  .footer-copy { font-size: 12px; color: var(--subtle); }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 640px) {
+    nav { padding: 0 24px; }
+    .nav-links { gap: 24px; }
+    .container { padding: 0 24px; }
+    .about-layout, .contact-layout { grid-template-columns: 1fr; gap: 40px; }
+    .project-item { grid-template-columns: 1fr; gap: 16px; }
+    .skills-row { grid-template-columns: 1fr; gap: 12px; }
+    footer { padding: 24px; flex-direction: column; gap: 8px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#hero" class="nav-logo">Garv Verma</a>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<section id="hero">
+  <div class="container">
+    <div class="hero-eyebrow">B.Tech CS AI · Newton School of Technology · 3rd Year</div>
+    <h1>Garv Verma —<br><em>AI Engineer</em><br>in the making.</h1>
+    <p class="hero-desc">
+      Computer Science student specialising in Artificial Intelligence. Interested in building
+      thoughtful software at the intersection of machine learning and real-world impact.
+      Actively seeking internship opportunities.
+    </p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-dark">Get in touch</a>
+      <a href="#projects" class="btn-line">View work</a>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container">
+    <div class="sec-label reveal">About</div>
+    <div class="about-layout">
+      <div class="about-text reveal">
+        <p>I'm a <strong>third-year B.Tech student</strong> at Newton School of Technology, pursuing Computer Science with a specialisation in Artificial Intelligence.</p>
+        <p>My interests sit at the junction of <strong>machine learning, software engineering</strong>, and building things that are genuinely useful. I care about writing clean code and understanding systems from first principles.</p>
+        <p>I'm currently looking for an internship where I can contribute meaningfully, learn from experienced engineers, and grow as a developer.</p>
+      </div>
+      <div class="reveal">
+        <div class="meta-row"><span class="meta-key">University</span><span class="meta-val">Newton School of Technology</span></div>
+        <div class="meta-row"><span class="meta-key">Degree</span><span class="meta-val">B.Tech CS (AI)</span></div>
+        <div class="meta-row"><span class="meta-key">Year</span><span class="meta-val">3rd Year</span></div>
+        <div class="meta-row"><span class="meta-key">Location</span><span class="meta-val">India</span></div>
+        <div class="meta-row"><span class="meta-key">Status</span><span class="meta-val">Open to internships</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="container">
+    <div class="sec-label reveal">Skills</div>
+    <h2 class="reveal">Technologies &<br><em>tools I work with</em></h2>
+    <div class="skills-table reveal">
+      <div class="skills-row">
+        <div class="skills-cat">Languages</div>
+        <div class="skills-list">
+          <span class="skill">Python</span><span class="skill">C++</span><span class="skill">JavaScript</span><span class="skill">SQL</span>
+        </div>
+      </div>
+      <div class="skills-row">
+        <div class="skills-cat">ML / AI</div>
+        <div class="skills-list">
+          <span class="skill">PyTorch</span><span class="skill">TensorFlow</span><span class="skill">Scikit-learn</span><span class="skill">NumPy</span><span class="skill">Pandas</span>
+        </div>
+      </div>
+      <div class="skills-row">
+        <div class="skills-cat">Web</div>
+        <div class="skills-list">
+          <span class="skill">React</span><span class="skill">Next.js</span><span class="skill">Node.js</span><span class="skill">HTML / CSS</span>
+        </div>
+      </div>
+      <div class="skills-row">
+        <div class="skills-cat">Tools</div>
+        <div class="skills-list">
+          <span class="skill">Git</span><span class="skill">GitHub</span><span class="skill">Linux</span><span class="skill">VS Code</span><span class="skill">Jupyter</span>
+        </div>
+      </div>
+      <div class="skills-row">
+        <div class="skills-cat">Concepts</div>
+        <div class="skills-list">
+          <span class="skill">Deep Learning</span><span class="skill">Data Structures</span><span class="skill">Algorithms</span><span class="skill">OOP</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="container">
+    <div class="sec-label reveal">Projects</div>
+    <h2 class="reveal">Work in<br><em>progress</em></h2>
+    <div class="projects-list reveal">
+      <div class="project-item">
+        <div>
+          <div class="proj-num">01</div>
+          <div class="proj-title">ML / AI Project</div>
+          <div class="proj-desc">A machine learning project applying deep learning to a real-world problem. Source code and write-up will be published on GitHub upon completion.</div>
+        </div>
+        <div><div class="proj-status">In progress</div></div>
+      </div>
+      <div class="project-item">
+        <div>
+          <div class="proj-num">02</div>
+          <div class="proj-title">Full-Stack Web Application</div>
+          <div class="proj-desc">A web application built with React and a Python backend. Focused on clean architecture and a thoughtful user experience.</div>
+        </div>
+        <div><div class="proj-status">In progress</div></div>
+      </div>
+      <div class="project-item">
+        <div>
+          <div class="proj-num">03</div>
+          <div class="proj-title">Data Science Project</div>
+          <div class="proj-desc">Exploratory data analysis and modelling on a publicly available dataset. Findings and notebook to be shared on GitHub.</div>
+        </div>
+        <div><div class="proj-status">Planned</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <div class="sec-label reveal">Contact</div>
+    <h2 class="reveal">Let's have<br><em>a conversation.</em></h2>
+    <div class="contact-layout">
+      <p class="contact-note reveal">
+        I'm actively looking for internship opportunities — whether in AI/ML, full-stack
+        development, or software engineering broadly. If you think there might be a fit,
+        I'd love to hear from you.
+      </p>
+      <div class="contact-links reveal">
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=garvverm33@gmail.com" target="_blank" class="contact-link"><span>Email</span><span class="contact-arrow">↗</span></a>
+        <a href="https://github.com/garvverma" target="_blank" class="contact-link"><span>GitHub</span><span class="contact-arrow">↗</span></a>
+        <a href="https://www.linkedin.com/in/garv-verma-863b5131a/" target="_blank" class="contact-link"><span>LinkedIn</span><span class="contact-arrow">↗</span></a>
+        <a href="/resume.pdf" target="_blank" class="contact-link"><span>Resume (PDF)</span><span class="contact-arrow">↗</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-name">Garv Verma</span>
+  <span class="footer-copy">B.Tech CS AI · Newton School of Technology</span>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver(
+    (entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); }),
+    { threshold: 0.12 }
+  );
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
