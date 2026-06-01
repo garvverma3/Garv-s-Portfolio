@@ -242,6 +242,20 @@
     white-space: nowrap;
     margin-top: 6px;
   }
+  .proj-link {
+    display: inline-block;
+    font-size: 13px;
+    color: var(--muted);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 2px;
+    margin-top: 16px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .proj-link:hover {
+    color: var(--text);
+    border-color: var(--text);
+  }
 
   .contact-layout {
     display: grid;
@@ -390,10 +404,11 @@
       <div class="project-item">
         <div>
           <div class="proj-num">01</div>
-          <div class="proj-title">ML / AI Project</div>
-          <div class="proj-desc">A machine learning project applying deep learning to a real-world problem. Source code and write-up will be published on GitHub upon completion.</div>
+          <div class="proj-title">Blinkit Data Analysis</div>
+          <div class="proj-desc">Exploratory data analysis on Blinkit's sales dataset. Uncovered patterns in outlet performance, product categories, and customer ratings using Python, Pandas, and Matplotlib. Group project — 3rd year B.Tech.</div>
+          <a href="https://github.com/Arya756/SecC_G19_BlinkitDataAnalysis" target="_blank" class="proj-link">View on GitHub ↗</a>
         </div>
-        <div><div class="proj-status">In progress</div></div>
+        <div><div class="proj-status">Completed</div></div>
       </div>
       <div class="project-item">
         <div>
